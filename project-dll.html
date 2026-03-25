@@ -5,6 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DLL · Layla Adeli</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.img-block {
+  margin: 1.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.img-block img {
+  width: 100%;
+  max-width: 680px;
+  border: 1px solid var(--border);
+  background: #fff;
+  display: block;
+}
+.img-caption {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+.img-caption span { color: var(--cyan); }
+.img-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.75rem 0;
+}
+.img-row .img-block { margin: 0; }
+@media (max-width: 600px) { .img-row { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
 
@@ -25,7 +54,7 @@
     <a href="projects.html" class="back-link">← back to projects</a>
 
     <div class="detail-eyebrow">IC Design · EE124 · 2026</div>
-    <h1 class="detail-title">8 GHz Delay<br>Lock Loop</h1>
+    <h1 class="detail-title">8 GHz Delay Lock Loop</h1>
 
     <div class="detail-meta">
       <span class="tag">Cadence Virtuoso</span>
@@ -39,45 +68,72 @@
 
       <h3>Overview</h3>
       <p>
-        Designed a low-power, low-jitter 8 GHz Delay Lock Loop (DLL) in 45nm CMOS technology as part of EE124 (Mixed-mode Integrated Circuits). The DLL is used to synchronize a clock signal with minimal phase offset and jitter — critical in high-speed communication and processor clock distribution networks.
+        Designed a low-power, low-jitter 8 GHz Delay Lock Loop (DLL) in 45nm CMOS technology as part of EE124 (Mixed-mode Integrated Circuits). The DLL synchronizes a clock signal with minimal phase offset and jitter — critical in high-speed communication and processor clock distribution networks.
       </p>
 
-      <h3>Architecture</h3>
+      <h3>Phase-Frequency Detector (PFD)</h3>
       <p>
-        The DLL consists of four main subsystems, each of which I designed and verified individually before integrating:
+        Detects the phase and frequency difference between the reference clock and the feedback signal. Implemented with a pair of D flip-flops and a reset path to generate UP/DOWN correction pulses.
       </p>
-      <ul>
-        <li><strong>Phase-Frequency Detector (PFD)</strong> — detects phase and frequency difference between the reference clock and the feedback signal. Implemented with a pair of D flip-flops and a reset path to generate UP/DOWN correction pulses.</li>
-        <li><strong>Charge Pump &amp; Loop Filter (CP/LF)</strong> — converts PFD output pulses into a smooth control voltage. The loop filter sets the loop bandwidth and stability characteristics of the DLL.</li>
-        <li><strong>Voltage-Controlled Delay Line (VCDL)</strong> — a chain of delay cells whose delay is tuned by the control voltage from the loop filter. The total delay of the VCDL is driven to exactly one reference clock period.</li>
-        <li><strong>Feedback path</strong> — connects the VCDL output back to the PFD, closing the loop.</li>
-      </ul>
+      <div class="img-block">
+        <img src="img-pfd.png" alt="PFD schematic">
+        <div class="img-caption"><span>fig 1.</span> Phase-frequency detector schematic</div>
+      </div>
+
+      <h3>Charge Pump &amp; Loop Filter (CP/LF)</h3>
+      <p>
+        Converts PFD output pulses into a smooth control voltage. The loop filter sets the loop bandwidth and stability characteristics of the DLL.
+      </p>
+      <div class="img-block">
+        <img src="img-cp.png" alt="Charge pump schematic">
+        <div class="img-caption"><span>fig 2.</span> Charge pump and loop filter schematic</div>
+      </div>
+
+      <h3>Voltage-Controlled Delay Line (VCDL)</h3>
+      <p>
+        A chain of delay cells whose delay is tuned by the control voltage from the loop filter. The total delay of the VCDL is driven to exactly one reference clock period.
+      </p>
+      <div class="img-block">
+        <img src="img-vcdl.png" alt="Delay line element schematic">
+        <div class="img-caption"><span>fig 3.</span> Voltage-controlled delay line element schematic</div>
+      </div>
+
+      <h3>Simulation Results</h3>
+      <p>
+        Simulations were run in Cadence Maestro using Spectre. Verified lock behavior under both clean and noisy supply and input clock conditions across all four output phases (0°, 90°, 180°, 270°).
+      </p>
+
+      <div class="img-block">
+        <img src="img-eye.png" alt="Eye diagrams">
+        <div class="img-caption"><span>fig 4.</span> Eye diagrams for noisy supply case at all four output phases</div>
+      </div>
+
+      <div class="img-row">
+        <div class="img-block">
+          <img src="img-table.png" alt="Results table">
+          <div class="img-caption"><span>fig 5.</span> Jitter, duty cycle, and power summary (N = nominal, NN = noisy)</div>
+        </div>
+        <div class="img-block">
+          <img src="img-phase.png" alt="Phase offset plot">
+          <div class="img-caption"><span>fig 6.</span> Output vs. input phase offset</div>
+        </div>
+      </div>
 
       <h3>Design Specifications</h3>
       <table class="spec-table">
         <tr><td>Technology</td><td>45nm CMOS</td></tr>
         <tr><td>Target Frequency</td><td>8 GHz</td></tr>
-        <tr><td>Peak-to-Peak Jitter</td><td>&lt; 11 ps (clean supply), verified with noisy supply</td></tr>
+        <tr><td>Peak-to-Peak Jitter</td><td>&lt; 11 ps (clean and noisy supply)</td></tr>
         <tr><td>Power Consumption</td><td>&lt; 3.8 mW</td></tr>
-        <tr><td>Lock Range</td><td>Verified across clean and noisy clock inputs</td></tr>
         <tr><td>Simulation Tool</td><td>Cadence Spectre via Maestro</td></tr>
       </table>
 
-      <h3>Simulation &amp; Verification</h3>
-      <p>
-        Simulations were run in Cadence Maestro using Spectre. I verified lock behavior under both clean and noisy supply and input clock conditions. The DLL achieved lock reliably in both scenarios, with peak-to-peak jitter staying under 11 ps and total power consumption under 3.8 mW.
-      </p>
-      <p>
-        Parametric sweeps were used to characterize the VCDL delay vs. control voltage, and transient simulations confirmed lock acquisition time and steady-state jitter.
-      </p>
-
       <h3>Outcome</h3>
       <p>
-        This project was awarded <strong>Best DLL Project</strong> in EE124 for having the best combined performance across power consumption, phase offset, and peak-to-peak jitter among the class submissions.
+        Awarded <strong>Best DLL Project</strong> in EE124 for best combined performance across power consumption, phase offset, and peak-to-peak jitter among the class submissions.
       </p>
 
     </div>
-
   </div>
 </div>
 
