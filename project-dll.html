@@ -6,37 +6,19 @@
 <title>DLL · Layla Adeli</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.img-block {
-  margin: 1.75rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-.img-block img {
-  width: 100%;
-  max-width: 680px;
-  border: 1px solid var(--border);
-  background: #fff;
-  display: block;
-}
-.img-caption {
-  font-size: 0.68rem;
-  color: var(--text-dim);
-  letter-spacing: 0.06em;
-}
+.img-block { margin: 1.75rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
+.img-block img { width: 100%; max-width: 680px; border: 1px solid var(--border); background: #fff; display: block; }
+.img-caption { font-family: 'JetBrains Mono', monospace; font-size: 0.67rem; color: var(--text-dim); letter-spacing: 0.05em; }
 .img-caption span { color: var(--cyan); }
-.img-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 1.75rem 0;
-}
+.img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.75rem 0; }
 .img-row .img-block { margin: 0; }
+.ref-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+.ref-list li { font-size: 0.8rem; color: var(--text-dim); line-height: 1.7; padding-left: 2rem; position: relative; }
+.ref-list li::before { content: attr(data-ref); position: absolute; left: 0; color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; }
 @media (max-width: 600px) { .img-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
   <ul class="nav-links">
@@ -50,12 +32,9 @@
 
 <div class="page">
   <div class="detail-page">
-
     <a href="projects.html" class="back-link">← back to projects</a>
-
     <div class="detail-eyebrow">IC Design · EE124 · 2026</div>
     <h1 class="detail-title">8 GHz Delay Lock Loop</h1>
-
     <div class="detail-meta">
       <span class="tag">Cadence Virtuoso</span>
       <span class="tag">Spectre</span>
@@ -67,71 +46,74 @@
     <div class="detail-body">
 
       <h3>Overview</h3>
-      <p>
-        Designed a low-power, low-jitter 8 GHz Delay Lock Loop (DLL) in 45nm CMOS technology as part of EE124 (Mixed-mode Integrated Circuits). The DLL synchronizes a clock signal with minimal phase offset and jitter — critical in high-speed communication and processor clock distribution networks.
-      </p>
+      <p>Designed a low-power, low-jitter 8 GHz Delay Lock Loop (DLL) in 45nm CMOS technology for EE124 (Mixed-mode Integrated Circuits). The DLL synchronizes a clock signal with minimal phase offset and jitter using a pass-transistor PFD and an 8-cell current-starved VCDL — critical in high-speed communication and processor clock distribution [1]. Simulation results confirmed stable phase lock for all required input phases (0, π/2, π, 3π/2) within a 5 ns rise time and settling window, under both ideal and noisy supply/input conditions.</p>
 
       <h3>Phase-Frequency Detector (PFD)</h3>
-      <p>
-        Detects the phase and frequency difference between the reference clock and the feedback signal. Implemented with a pair of D flip-flops and a reset path to generate UP/DOWN correction pulses.
-      </p>
+      <p>A pass-transistor-based PFD detects the phase and frequency difference between the reference clock and feedback signal, generating UP/DOWN correction pulses [2][3]. Implemented with a pair of D flip-flops and a reset path to resolve the dead-zone and minimize static phase offset. The architecture was selected for its low power draw and compatibility with the high-frequency operating target.</p>
       <div class="img-block">
         <img src="img-pfd.png" alt="PFD schematic">
         <div class="img-caption"><span>fig 1.</span> Phase-frequency detector schematic</div>
       </div>
 
       <h3>Charge Pump &amp; Loop Filter (CP/LF)</h3>
-      <p>
-        Converts PFD output pulses into a smooth control voltage. The loop filter sets the loop bandwidth and stability characteristics of the DLL.
-      </p>
+      <p>The charge pump converts PFD UP/DOWN pulses into a smooth control voltage V<sub>ctrl</sub>. The loop filter capacitor value and charge pump current were sized to achieve a stable lock within the 5 ns window, with sufficient phase margin to avoid oscillation. The mirrored biasing scheme keeps current consumption low while maintaining symmetry between charge and discharge paths [1].</p>
       <div class="img-block">
         <img src="img-cp.png" alt="Charge pump schematic">
         <div class="img-caption"><span>fig 2.</span> Charge pump and loop filter schematic</div>
       </div>
 
       <h3>Voltage-Controlled Delay Line (VCDL)</h3>
-      <p>
-        A chain of delay cells whose delay is tuned by the control voltage from the loop filter. The total delay of the VCDL is driven to exactly one reference clock period.
-      </p>
+      <p>An 8-cell cascaded current-starved delay line whose per-cell delay is tuned by V<sub>ctrl</sub> from the loop filter. The total VCDL delay is driven to exactly one reference clock period, locking the output phases at 0°, 90°, 180°, and 270°. A non-starved inverter buffer (M<sub>10</sub>, M<sub>11</sub>) at the output restores a near-square-wave output and maintains switching symmetry. The V<sub>ctrl</sub>-to-delay characteristic was verified across the full operating range [4].</p>
       <div class="img-block">
-        <img src="img-vcdl.png" alt="Delay line element schematic">
+        <img src="img-vcdl.png" alt="VCDL delay cell schematic">
         <div class="img-caption"><span>fig 3.</span> Voltage-controlled delay line element schematic</div>
       </div>
 
-      <h3>Simulation Results</h3>
-      <p>
-        Simulations were run in Cadence Maestro using Spectre. Verified lock behavior under both clean and noisy supply and input clock conditions across all four output phases (0°, 90°, 180°, 270°).
-      </p>
-
+      <h3>Simulation Results — Case I: No Noise</h3>
+      <p>Initial characterization was performed under ideal conditions (no supply or input noise) to establish baseline locking performance. V<sub>ctrl</sub> achieved a smooth, well-damped transition to steady state for all four phases within 5 ns, locking at 0.605 V, 0.560 V, 0.540 V, and 0.517 V for 0°, 90°, 180°, and 270° respectively — consistent with the expected delay-vs-V<sub>ctrl</sub> curve.</p>
+      <p>The averaged phase transfer characteristic showed output values of −0.005π, 0.495π, 1.028π, and 1.510π against target inputs of 0, π/2, π, and 3π/2 — a maximum average displacement of 0.030π (1.87 ps) at the π phase shift, validating the precision of transistor sizing and CP current symmetry. Eye diagrams confirmed significant eye openings with sub-picosecond peak-to-peak jitter across all phases.</p>
       <div class="img-block">
-        <img src="img-eye.png" alt="Eye diagrams">
-        <div class="img-caption"><span>fig 4.</span> Eye diagrams for noisy supply case at all four output phases</div>
+        <img src="img-phase.png" alt="Phase offset plot">
+        <div class="img-caption"><span>fig 4.</span> Averaged φ<sub>in</sub> vs. φ<sub>out</sub> — high linearity across the full 2π range</div>
       </div>
 
+      <h3>Simulation Results — Case II: Supply &amp; Input Noise</h3>
+      <p>Under noisy conditions (noise injected on V<sub>in0</sub> and V<sub>sup</sub>), the DLL maintained stable lock for all four phases within the same 5 ns window. V<sub>ctrl</sub> exhibited visible high-frequency ripple at steady state — a direct consequence of supply noise coupling through the mirrored biasing — but the loop remained well-damped and required no re-sizing.</p>
+      <p>Noise increased timing uncertainty significantly: peak-to-peak jitter rose to a maximum of 12.47 ps at the 90° phase shift, and RMS jitter peaked at 3.26 ps. Despite this, duty cycle distortion remained below 1% across all cases (within ±1% of the 50% ideal), and power consumption stayed under 3.8 mW — well within the 8 mW specification. The eye diagrams maintained strong horizontal and vertical openings across all four output phases.</p>
+      <div class="img-block">
+        <img src="img-eye.png" alt="Eye diagrams noisy case">
+        <div class="img-caption"><span>fig 5.</span> Eye diagrams for all four output phases under noisy supply and input conditions</div>
+      </div>
+
+      <h3>Performance Summary</h3>
       <div class="img-row">
         <div class="img-block">
-          <img src="img-table.png" alt="Results table">
-          <div class="img-caption"><span>fig 5.</span> Jitter, duty cycle, and power summary (N = nominal, NN = noisy)</div>
+          <img src="img-table.png" alt="Jitter and power results table">
+          <div class="img-caption"><span>fig 6.</span> Pk-to-pk jitter, RMS jitter, duty cycle, and power — noisy (N) vs. no-noise (NN)</div>
         </div>
-        <div class="img-block">
-          <img src="img-phase.png" alt="Phase offset plot">
-          <div class="img-caption"><span>fig 6.</span> Output vs. input phase offset</div>
+        <div class="img-block" style="display:flex;flex-direction:column;gap:0.75rem;justify-content:flex-start;">
+          <table class="spec-table" style="margin:0;">
+            <tr><td>Technology</td><td>45nm CMOS</td></tr>
+            <tr><td>Frequency</td><td>8 GHz</td></tr>
+            <tr><td>Pk-Pk Jitter (noisy)</td><td>&lt; 12.5 ps</td></tr>
+            <tr><td>Pk-Pk Jitter (clean)</td><td>&lt; 1.2 ps</td></tr>
+            <tr><td>DCD</td><td>&lt; 1% (both cases)</td></tr>
+            <tr><td>Power</td><td>&lt; 3.8 mW</td></tr>
+            <tr><td>Lock Time</td><td>&lt; 5 ns</td></tr>
+          </table>
         </div>
       </div>
 
-      <h3>Design Specifications</h3>
-      <table class="spec-table">
-        <tr><td>Technology</td><td>45nm CMOS</td></tr>
-        <tr><td>Target Frequency</td><td>8 GHz</td></tr>
-        <tr><td>Peak-to-Peak Jitter</td><td>&lt; 11 ps (clean and noisy supply)</td></tr>
-        <tr><td>Power Consumption</td><td>&lt; 3.8 mW</td></tr>
-        <tr><td>Simulation Tool</td><td>Cadence Spectre via Maestro</td></tr>
-      </table>
-
       <h3>Outcome</h3>
-      <p>
-        Awarded <strong>Best DLL Project</strong> in EE124 for best combined performance across power consumption, phase offset, and peak-to-peak jitter among the class submissions.
-      </p>
+      <p>Awarded <strong>Best DLL Project</strong> in EE124 for best combined performance across power consumption, phase offset, and peak-to-peak jitter among class submissions. All target specifications were met in both ideal and noisy conditions.</p>
+
+      <h3>References</h3>
+      <ul class="ref-list">
+        <li data-ref="[1]">B. Razavi, "The Delay-Locked Loop [A Circuit for All Seasons]," <em>IEEE Solid-State Circuits Magazine</em>, vol. 10, no. 3, pp. 9–15, Summer 2018.</li>
+        <li data-ref="[2]">A. Rezaeian, G. Ardeshir, and M. Gholami, "A Low-Power and High-Frequency Phase Frequency Detector for a 3.33-GHz Delay Locked Loop," <em>Circuits, Systems, and Signal Processing</em>, vol. 39, no. 4, pp. 1735–1750, 2019.</li>
+        <li data-ref="[3]">M. Mansuri, D. Liu, and C.-K. Yang, "Fast frequency acquisition phase-frequency detectors for Gsamples/s phase-locked loops," <em>IEEE JSSC</em>, vol. 37, no. 10, pp. 1331–1334, Oct. 2002.</li>
+        <li data-ref="[4]">C.-K. Yang, "Delay-Locked Loops — An Overview," in <em>Phase-locking in High-Performance Systems</em>. IEEE Press, 2003, pp. 13–22.</li>
+      </ul>
 
     </div>
   </div>

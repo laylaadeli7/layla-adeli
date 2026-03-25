@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <nav>
   <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
   <ul class="nav-links">
@@ -21,12 +20,9 @@
 
 <div class="page">
   <div class="detail-page">
-
     <a href="projects.html" class="back-link">← back to projects</a>
-
-    <div class="detail-eyebrow">Digital Design · EE</div>
+    <div class="detail-eyebrow">Digital Design · Embedded Systems</div>
     <h1 class="detail-title">8-bit CPU</h1>
-
     <div class="detail-meta">
       <span class="tag">ABEL</span>
       <span class="tag">FSM</span>
@@ -37,35 +33,49 @@
     <div class="detail-body">
 
       <h3>Overview</h3>
-      <p>
-        Designed and implemented a fully functional 8-bit CPU from the ground up. The architecture was specified and implemented in ABEL (Advanced Boolean Expression Language), covering all major components of a classic processor pipeline — from arithmetic to memory addressing to control flow.
-      </p>
+      <p>Designed and implemented a fully functional 8-bit CPU from scratch. The architecture was specified and implemented in ABEL (Advanced Boolean Expression Language), covering all major subsystems of a classic processor: arithmetic/logic, memory addressing, program flow, and sequenced control. Each component was designed, verified independently, then integrated into a working processor capable of executing a custom instruction set.</p>
 
-      <h3>Components</h3>
+      <h3>Arithmetic Logic Unit (ALU)</h3>
+      <p>The ALU handles all computation on 8-bit operands. The supported operations include addition, subtraction, bitwise AND/OR, and logical shifts. Output flags — zero, carry, and overflow — are generated combinationally and fed to the control unit to support conditional branching. Careful attention was paid to two's complement overflow detection and correct carry propagation across the full 8-bit width.</p>
+
+      <h3>Program Counter &amp; Program Memory Address Unit (PC/PMAU)</h3>
+      <p>The PC tracks the address of the currently executing instruction and is incremented each cycle in normal execution. The PMAU computes the effective program memory address, supporting both sequential fetch and branch targets. On a taken branch, the PC is loaded with the branch target address rather than PC+1, enabling conditional and unconditional jumps within the program.</p>
+
+      <h3>Data Memory Address Unit (DMAU)</h3>
+      <p>The DMAU manages address generation for load and store instructions. It computes the effective data memory address from instruction fields and register values, then presents this to the data memory bus. Separating the DMAU from the PMAU ensures that instruction fetch and data memory access can be sequenced without conflict under FSM control.</p>
+
+      <h3>Control Unit &amp; Finite State Machine (FSM)</h3>
+      <p>The control unit is the central sequencer of the CPU, implemented as a finite state machine in ABEL. It steps through fetch, decode, and execute stages for each instruction, asserting the correct control signals — register enables, ALU operation select, memory read/write, PC load — at each cycle. The FSM was designed to handle all instruction types cleanly, including multi-cycle operations like load/store and conditional branches that require different sequencing paths depending on ALU flag state.</p>
+
+      <h3>Instruction Set</h3>
+      <p>The CPU supports a minimal but complete instruction set:</p>
       <ul>
-        <li><strong>ALU (Arithmetic Logic Unit)</strong> — handles all arithmetic and logical operations on 8-bit operands, including addition, subtraction, AND, OR, and shift operations.</li>
-        <li><strong>PC / PMAU (Program Counter / Program Memory Address Unit)</strong> — tracks the current instruction address and computes the next address, supporting sequential execution and branching.</li>
-        <li><strong>DMAU (Data Memory Address Unit)</strong> — manages addressing into data memory for load and store operations.</li>
-        <li><strong>Control Unit with FSM</strong> — a finite state machine that sequences through fetch, decode, and execute stages, generating the appropriate control signals for each component at each step.</li>
+        <li><strong>Arithmetic:</strong> ADD, SUB with flag generation</li>
+        <li><strong>Logic:</strong> AND, OR, shift left/right</li>
+        <li><strong>Memory:</strong> LOAD (memory → register), STORE (register → memory)</li>
+        <li><strong>Control flow:</strong> unconditional JUMP, conditional branch on zero/carry/overflow flags</li>
       </ul>
 
-      <h3>Design Approach</h3>
-      <p>
-        Each component was designed and verified independently before integration. The FSM-based control unit was central to the architecture — it had to correctly sequence control signals across all instruction types while handling edge cases like branching and memory wait states.
-      </p>
-      <p>
-        The instruction set was kept minimal but complete: arithmetic, logic, memory access (load/store), and conditional branching were all supported. ABEL allowed specifying the logic equations and state transitions directly, which made it straightforward to reason about timing and correctness.
-      </p>
-
-      <h3>Key Challenges</h3>
+      <h3>Design Challenges</h3>
+      <p>The most demanding aspect was ensuring the FSM correctly sequenced all instruction types without introducing hazards. Particular care was needed for:</p>
       <ul>
-        <li>Ensuring the FSM correctly handled all instruction types without hazards or incorrect sequencing.</li>
-        <li>Coordinating the PMAU and DMAU so that instruction fetch and data access didn't conflict.</li>
-        <li>Verifying ALU flag behavior (zero, carry, overflow) and propagating them correctly into conditional branch logic.</li>
+        <li>Coordinating the PMAU and DMAU so instruction fetch and data access don't overlap during load/store sequences.</li>
+        <li>Ensuring ALU flags were latched at the correct cycle so conditional branches read stable values.</li>
+        <li>Verifying that the reset state of the FSM brought the CPU to a known, clean starting condition regardless of initial register contents.</li>
       </ul>
+
+      <h3>Specifications</h3>
+      <table class="spec-table">
+        <tr><td>Data Width</td><td>8-bit</td></tr>
+        <tr><td>Architecture</td><td>Accumulator-based</td></tr>
+        <tr><td>Implementation Language</td><td>ABEL</td></tr>
+        <tr><td>Control Unit</td><td>Finite State Machine (FSM)</td></tr>
+        <tr><td>Memory</td><td>Separate program and data memory (Harvard-style)</td></tr>
+        <tr><td>Instruction Set</td><td>Arithmetic, logic, load/store, conditional branch</td></tr>
+        <tr><td>Flags</td><td>Zero, Carry, Overflow</td></tr>
+      </table>
 
     </div>
-
   </div>
 </div>
 
