@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8-bit CPU · Layla Adeli</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html" class="active">projects</a></li>
+    <li><a href="research.html">research</a></li>
+    <li><a href="awards.html">awards</a></li>
+    <li><a href="mailto:ladeli@caltech.edu" class="nav-cta">contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="detail-page">
+
+    <a href="projects.html" class="back-link">← back to projects</a>
+
+    <div class="detail-eyebrow">Digital Design · EE</div>
+    <h1 class="detail-title">8-bit CPU</h1>
+
+    <div class="detail-meta">
+      <span class="tag">ABEL</span>
+      <span class="tag">FSM</span>
+      <span class="tag">Digital Logic</span>
+      <span class="tag">Embedded Systems</span>
+    </div>
+
+    <div class="detail-body">
+
+      <h3>Overview</h3>
+      <p>
+        Designed and implemented a fully functional 8-bit CPU from the ground up. The architecture was specified and implemented in ABEL (Advanced Boolean Expression Language), covering all major components of a classic processor pipeline — from arithmetic to memory addressing to control flow.
+      </p>
+
+      <h3>Components</h3>
+      <ul>
+        <li><strong>ALU (Arithmetic Logic Unit)</strong> — handles all arithmetic and logical operations on 8-bit operands, including addition, subtraction, AND, OR, and shift operations.</li>
+        <li><strong>PC / PMAU (Program Counter / Program Memory Address Unit)</strong> — tracks the current instruction address and computes the next address, supporting sequential execution and branching.</li>
+        <li><strong>DMAU (Data Memory Address Unit)</strong> — manages addressing into data memory for load and store operations.</li>
+        <li><strong>Control Unit with FSM</strong> — a finite state machine that sequences through fetch, decode, and execute stages, generating the appropriate control signals for each component at each step.</li>
+      </ul>
+
+      <h3>Design Approach</h3>
+      <p>
+        Each component was designed and verified independently before integration. The FSM-based control unit was central to the architecture — it had to correctly sequence control signals across all instruction types while handling edge cases like branching and memory wait states.
+      </p>
+      <p>
+        The instruction set was kept minimal but complete: arithmetic, logic, memory access (load/store), and conditional branching were all supported. ABEL allowed specifying the logic equations and state transitions directly, which made it straightforward to reason about timing and correctness.
+      </p>
+
+      <h3>Key Challenges</h3>
+      <ul>
+        <li>Ensuring the FSM correctly handled all instruction types without hazards or incorrect sequencing.</li>
+        <li>Coordinating the PMAU and DMAU so that instruction fetch and data access didn't conflict.</li>
+        <li>Verifying ALU flag behavior (zero, carry, overflow) and propagating them correctly into conditional branch logic.</li>
+      </ul>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>Layla Adeli · Caltech EE</span>
+  <span><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a> · <a href="https://linkedin.com/in/layla-adeli/" target="_blank">linkedin</a></span>
+</footer>
+</body>
+</html>

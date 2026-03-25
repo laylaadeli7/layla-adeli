@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects · Layla Adeli</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html" class="active">projects</a></li>
+    <li><a href="research.html">research</a></li>
+    <li><a href="awards.html">awards</a></li>
+    <li><a href="mailto:ladeli@caltech.edu" class="nav-cta">contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="section fade" style="padding-top: 4rem;">
+    <div class="section-label">course projects</div>
+    <h2 class="section-title">Projects</h2>
+
+    <div class="projects-grid">
+
+      <a href="project-dll.html" class="project-card fade">
+        <span class="card-tag">IC Design · EE124</span>
+        <div class="card-title">8 GHz Delay Lock Loop</div>
+        <p class="card-desc">Low-power, low-jitter DLL in 45nm CMOS. Designed PFD, charge pump, loop filter, and voltage-controlled delay line. Verified in Cadence Maestro with Spectre.</p>
+        <div class="card-stack">
+          <span class="tag">Cadence Virtuoso</span>
+          <span class="tag">Spectre</span>
+          <span class="tag">45nm CMOS</span>
+        </div>
+        <div class="card-arrow">view project →</div>
+      </a>
+
+      <a href="project-cpu.html" class="project-card fade">
+        <span class="card-tag">Digital Design · EE</span>
+        <div class="card-title">8-bit CPU</div>
+        <p class="card-desc">Fully functional 8-bit CPU from scratch. Architecture designed in ABEL, including ALU, program/data memory address units, and a finite state machine control unit.</p>
+        <div class="card-stack">
+          <span class="tag">ABEL</span>
+          <span class="tag">FSM</span>
+          <span class="tag">Digital Logic</span>
+        </div>
+        <div class="card-arrow">view project →</div>
+      </a>
+
+      <div class="project-card card-no-link fade">
+        <span class="card-tag">Sensing · ML</span>
+        <div class="card-title">Hand Gesture Recognition</div>
+        <p class="card-desc">7×7 photodiode array with NMOS switches and Arduino, connected to a PC over serial. Trained a CNN to classify distinct hand gestures from optical sensor data.</p>
+        <div class="card-stack">
+          <span class="tag">CNN</span>
+          <span class="tag">Arduino</span>
+          <span class="tag">Python</span>
+          <span class="tag">Photodiodes</span>
+        </div>
+      </div>
+
+      <div class="project-card card-no-link fade">
+        <span class="card-tag">Biomedical · Wearable</span>
+        <div class="card-title">Pulse Oximeter</div>
+        <p class="card-desc">Arduino and Python-based wearable that reports heart rate, blood oxygen levels, and arrhythmia warnings to the user in real time.</p>
+        <div class="card-stack">
+          <span class="tag">Arduino</span>
+          <span class="tag">Python</span>
+          <span class="tag">Signal Processing</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Layla Adeli · Caltech EE</span>
+  <span><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a> · <a href="https://linkedin.com/in/layla-adeli/" target="_blank">linkedin</a></span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

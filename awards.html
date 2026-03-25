@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awards · Layla Adeli</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html">projects</a></li>
+    <li><a href="research.html">research</a></li>
+    <li><a href="awards.html" class="active">awards</a></li>
+    <li><a href="mailto:ladeli@caltech.edu" class="nav-cta">contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="section fade" style="padding-top: 4rem;">
+    <div class="section-label">recognition</div>
+    <h2 class="section-title">Awards &amp; Publications</h2>
+
+    <div class="section-label" style="margin-top:0; margin-bottom:0.5rem; font-size:0.6rem;">awards</div>
+    <div class="awards-list" style="margin-bottom:3rem">
+
+      <div class="award-item fade">
+        <div>
+          <div class="award-name">Best DLL Project Award</div>
+          <div class="award-desc">EE124 — awarded for best combined performance across power consumption, phase offset, and peak-to-peak jitter</div>
+        </div>
+        <span class="award-year">2026</span>
+      </div>
+
+      <div class="award-item fade">
+        <div>
+          <div class="award-name">Taylor Lawrence SURF Fellow</div>
+          <div class="award-desc">Named fellowship to conduct summer research at the University of Cambridge</div>
+        </div>
+        <span class="award-year">2025</span>
+      </div>
+
+      <div class="award-item fade">
+        <div>
+          <div class="award-name">Fred and Jean Felberg SURF Fellow</div>
+          <div class="award-desc">Named fellowship to conduct summer research at Caltech</div>
+        </div>
+        <span class="award-year">2024</span>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top:0; margin-bottom:0.5rem; font-size:0.6rem;">publications</div>
+    <div class="awards-list">
+
+      <div class="award-item fade">
+        <div>
+          <div class="award-name">Nanotechnology in Cancer Therapeutics and Imaging</div>
+          <div class="award-desc">
+            Youth Medical Journal, 2021 ·
+            <a href="https://youthmedicaljournal.com/2021/10/16/nanotechnology-in-cancer-therapeutics-and-imaging/" target="_blank" style="color:var(--cyan); text-decoration:none;">read ↗</a>
+          </div>
+        </div>
+        <span class="award-year">2021</span>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>Layla Adeli · Caltech EE</span>
+  <span><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a> · <a href="https://linkedin.com/in/layla-adeli/" target="_blank">linkedin</a></span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

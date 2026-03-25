@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLL · Layla Adeli</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html" class="active">projects</a></li>
+    <li><a href="research.html">research</a></li>
+    <li><a href="awards.html">awards</a></li>
+    <li><a href="mailto:ladeli@caltech.edu" class="nav-cta">contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="detail-page">
+
+    <a href="projects.html" class="back-link">← back to projects</a>
+
+    <div class="detail-eyebrow">IC Design · EE124 · 2026</div>
+    <h1 class="detail-title">8 GHz Delay<br>Lock Loop</h1>
+
+    <div class="detail-meta">
+      <span class="tag">Cadence Virtuoso</span>
+      <span class="tag">Spectre</span>
+      <span class="tag">45nm CMOS</span>
+      <span class="tag">Maestro</span>
+      <span class="tag">Analog IC Design</span>
+    </div>
+
+    <div class="detail-body">
+
+      <h3>Overview</h3>
+      <p>
+        Designed a low-power, low-jitter 8 GHz Delay Lock Loop (DLL) in 45nm CMOS technology as part of EE124 (Mixed-mode Integrated Circuits). The DLL is used to synchronize a clock signal with minimal phase offset and jitter — critical in high-speed communication and processor clock distribution networks.
+      </p>
+
+      <h3>Architecture</h3>
+      <p>
+        The DLL consists of four main subsystems, each of which I designed and verified individually before integrating:
+      </p>
+      <ul>
+        <li><strong>Phase-Frequency Detector (PFD)</strong> — detects phase and frequency difference between the reference clock and the feedback signal. Implemented with a pair of D flip-flops and a reset path to generate UP/DOWN correction pulses.</li>
+        <li><strong>Charge Pump &amp; Loop Filter (CP/LF)</strong> — converts PFD output pulses into a smooth control voltage. The loop filter sets the loop bandwidth and stability characteristics of the DLL.</li>
+        <li><strong>Voltage-Controlled Delay Line (VCDL)</strong> — a chain of delay cells whose delay is tuned by the control voltage from the loop filter. The total delay of the VCDL is driven to exactly one reference clock period.</li>
+        <li><strong>Feedback path</strong> — connects the VCDL output back to the PFD, closing the loop.</li>
+      </ul>
+
+      <h3>Design Specifications</h3>
+      <table class="spec-table">
+        <tr><td>Technology</td><td>45nm CMOS</td></tr>
+        <tr><td>Target Frequency</td><td>8 GHz</td></tr>
+        <tr><td>Peak-to-Peak Jitter</td><td>&lt; 11 ps (clean supply), verified with noisy supply</td></tr>
+        <tr><td>Power Consumption</td><td>&lt; 3.8 mW</td></tr>
+        <tr><td>Lock Range</td><td>Verified across clean and noisy clock inputs</td></tr>
+        <tr><td>Simulation Tool</td><td>Cadence Spectre via Maestro</td></tr>
+      </table>
+
+      <h3>Simulation &amp; Verification</h3>
+      <p>
+        Simulations were run in Cadence Maestro using Spectre. I verified lock behavior under both clean and noisy supply and input clock conditions. The DLL achieved lock reliably in both scenarios, with peak-to-peak jitter staying under 11 ps and total power consumption under 3.8 mW.
+      </p>
+      <p>
+        Parametric sweeps were used to characterize the VCDL delay vs. control voltage, and transient simulations confirmed lock acquisition time and steady-state jitter.
+      </p>
+
+      <h3>Outcome</h3>
+      <p>
+        This project was awarded <strong>Best DLL Project</strong> in EE124 for having the best combined performance across power consumption, phase offset, and peak-to-peak jitter among the class submissions.
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>Layla Adeli · Caltech EE</span>
+  <span><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a> · <a href="https://linkedin.com/in/layla-adeli/" target="_blank">linkedin</a></span>
+</footer>
+</body>
+</html>
