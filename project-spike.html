@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neural Spike Detector ASIC · Layla Adeli</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
+  <ul class="nav-links">
+    <li><a href="index.html">home</a></li>
+    <li><a href="projects.html" class="active">projects</a></li>
+    <li><a href="research.html">research</a></li>
+    <li><a href="awards.html">awards</a></li>
+    <li><a href="mailto:ladeli@caltech.edu" class="nav-cta">contact</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="detail-page">
+    <a href="projects.html" class="back-link">← back to projects</a>
+    <div class="detail-eyebrow">IC Design · Tiny Tapeout</div>
+    <h1 class="detail-title">Neural Spike Detector ASIC</h1>
+    <div class="detail-meta">
+      <span class="tag">Verilog</span>
+      <span class="tag">ASIC</span>
+      <span class="tag">Tiny Tapeout</span>
+      <span class="tag">cocotb</span>
+      <span class="tag">Signal Processing</span>
+    </div>
+
+    <div class="detail-body">
+
+      <h3>Overview</h3>
+      <p>Designed and taped out a digital neural spike detector in Verilog, fabricated on GlobalFoundries' 180nm process via the Tiny Tapeout GF26b shuttle, with chips expected back in November 2026. The chip implements a complete real-time pipeline for detecting neural action potentials in a sampled signal: a pipelined IIR bandpass filter, a nonlinear energy operator (NEO) for spike emphasis, and an adaptive EWMA-based threshold for detection — all with parameters configurable over SPI.</p>
+
+      <h3>Pipelined IIR Bandpass Filter</h3>
+      <p>The front end is an infinite impulse response (IIR) bandpass filter that isolates the frequency band where extracellular action potentials live, rejecting low-frequency drift and high-frequency noise outside the band of interest. The filter's datapath is pipelined so that each stage of the multiply-accumulate chain completes within a single clock cycle, allowing the design to run at the target clock rate without becoming the critical timing path.</p>
+
+      <h3>Nonlinear Energy Operator (NEO)</h3>
+      <p>Filtered samples are passed through a nonlinear energy operator, which combines a signal sample with its neighbors to produce an instantaneous estimate of signal energy. This nonlinear transform sharply emphasizes the fast, high-amplitude transients characteristic of action potentials relative to background noise, making spikes far easier to separate from baseline activity than they would be in the raw filtered signal.</p>
+
+      <h3>Adaptive EWMA Threshold</h3>
+      <p>Rather than detecting against a fixed threshold, the design tracks an exponentially weighted moving average (EWMA) of the NEO output to continuously estimate the local noise floor. A spike is flagged when the signal exceeds this adaptive baseline by a configurable margin, allowing the detector to stay robust as background noise levels drift over time.</p>
+
+      <h3>SPI-Configurable Parameters</h3>
+      <p>Filter coefficients, EWMA decay rate, and detection sensitivity are all exposed through a SPI interface, so the detector's behavior can be tuned post-fabrication without resynthesizing the design — useful for adapting to different electrode/noise conditions during testing.</p>
+
+      <h3>Timing Closure</h3>
+      <p>Post-synthesis static timing analysis revealed timing closure violations in the filter and NEO datapath. These were diagnosed and resolved by inserting additional pipeline registers along the critical path, trading a small amount of latency for a design that closed timing reliably at the target clock frequency.</p>
+
+      <h3>Verification</h3>
+      <p>Functional correctness was verified with cocotb and Icarus Verilog testbenches at the RTL level, then re-run against the post-layout gate-level netlist to confirm that synthesis and place-and-route preserved correct behavior, including the pipelining changes introduced during timing closure.</p>
+
+      <h3>Design Challenges</h3>
+      <p>The main challenge was closing timing on the filter and NEO datapath without disrupting the carefully tuned detection behavior. Particular care was needed for:</p>
+      <ul>
+        <li>Adding pipeline stages without shifting the relative timing between the filtered signal, NEO output, and EWMA threshold comparison.</li>
+        <li>Re-verifying detection accuracy after each pipelining change, since added latency could otherwise desynchronize the threshold comparison from the signal it was meant to gate.</li>
+        <li>Confirming gate-level behavior matched RTL behavior post-layout, where parasitic delays can expose timing issues invisible at the RTL stage.</li>
+      </ul>
+
+      <h3>Specifications</h3>
+      <table class="spec-table">
+        <tr><td>Process</td><td>GlobalFoundries 180nm (Tiny Tapeout GF26b shuttle)</td></tr>
+        <tr><td>Implementation Language</td><td>Verilog</td></tr>
+        <tr><td>Signal Path</td><td>Pipelined IIR bandpass filter → nonlinear energy operator → adaptive EWMA threshold</td></tr>
+        <tr><td>Configuration</td><td>SPI-configurable filter and threshold parameters</td></tr>
+        <tr><td>Verification</td><td>cocotb / Icarus Verilog, RTL and post-layout gate-level</td></tr>
+        <tr><td>Status</td><td>Taped out; chips expected November 2026</td></tr>
+      </table>
+
+      <p><a href="https://github.com/laylaadeli7/tt_neural_spike_detection" target="_blank" class="back-link">view source on github →</a></p>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Layla Adeli · Caltech EE</span>
+  <span><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a> · <a href="https://linkedin.com/in/layla-adeli/" target="_blank">linkedin</a></span>
+</footer>
+</body>
+</html>
