@@ -33,8 +33,7 @@
       <p>
         I’m a senior studying <strong>Electrical Engineering</strong> (Circuits and Electronics) at Caltech.
         I do research in the <a href="https://mics.caltech.edu/" target="_blank" rel="noopener">Mixed-Mode Integrated Circuits and Systems (MICS) Lab</a>
-        with Prof. Azita Emami. My senior thesis is a neural recording front end that decides for itself which
-        channels are worth recording.
+        with Prof. Azita Emami. My senior thesis is a neural recording front end that selects channels to record from to minimize power. 
       </p>
       <p>
         I’m broadly interested in <strong>ultra-low-power mixed-signal integrated circuits for bioelectronic devices</strong>,
@@ -64,7 +63,7 @@
   <ul class="news">
     <li><span class="d">Nov 2026</span><span>Abstract on our redox-flow iontophoresis platform submitted to <em>innoLAE 2027</em>.</span></li>
     <li><span class="d">Nov 2026</span><span>Silicon for my <a href="project-spike.html">neural spike detector ASIC</a> (Tiny Tapeout GF26b) expected back.</span></li>
-    <li><span class="d">Oct 2026</span><span>Started working with Xue Ru Zhou (CHIC Lab) on low-power on-chip spike sorting.</span></li>
+    <li><span class="d">Oct 2026</span><span>Started working on low-power on-chip spike sorting.</span></li>
     <li><span class="d">2026</span><span>Nominated by Caltech for the Churchill Scholarship (one of two institutional nominees).</span></li>
     <li><span class="d">2026</span><span>Won the Best DLL Project Award in EE 124 for my <a href="project-dll.html">8 GHz delay-locked loop</a>.</span></li>
   </ul>
@@ -78,8 +77,7 @@
       <a class="e-title" href="research-thesis.html">A 192-electrode neural recording front end with continuous on-chip channel selection in 65&nbsp;nm CMOS</a>
       <div class="e-meta">Senior thesis<span class="sep">|</span>MICS Lab, Caltech<span class="sep">|</span>Advisor: Azita Emami<span class="sep">|</span>2025–present</div>
       <p class="e-desc">Records only the 32 most informative of 192 electrodes and re-selects them as signals drift, using
-        unsupervised on-chip statistics. Across 14 sessions over 3.5 years, the top 32 of 96 channels keep 96% of
-        all-channel decoding accuracy (random selection: 50%, supervised: 97%).</p>
+        unsupervised on-chip statistics. </p>
     </div>
   </div>
 
@@ -89,15 +87,14 @@
       <a class="e-title" href="research-feature-extraction.html">On-chip feature extraction for neuromorphic brain–computer interfaces</a>
       <div class="e-meta">MICS Lab, Caltech<span class="sep">|</span>with Loai Danial &amp; Azita Emami<span class="sep">|</span>2025–present</div>
       <p class="e-desc">Uses an event-driven analog front end as an analog-to-event encoder and compares compact spiking-neuron
-        feature extractors on its events. A resonate-and-fire bank reaches R²&nbsp;=&nbsp;0.690, against 0.645 for a db4
-        wavelet and 6-band spike-band power, with the lowest spread across sessions.</p>
+        feature extractors on its events.</p>
     </div>
   </div>
 
   <div class="entry no-thumb">
     <div>
       <span class="e-title">Low-power on-chip spike sorting</span>
-      <div class="e-meta">CHIC Lab, Caltech<span class="sep">|</span>with Xue Ru Zhou<span class="sep">|</span>Oct 2026–present</div>
+      <div class="e-meta">with Xue Ru Zhou (CHIC Lab) <span class="sep">|</span>Oct 2026–present</div>
       <p class="e-desc">Developing a spike-sorting pipeline efficient enough to run on every channel of a high-density implant,
         so neural data can be sorted at the electrode. Exploring spiking-neuron feature extractors and unsupervised on-chip clustering.</p>
     </div>
@@ -118,8 +115,7 @@
     <div>
       <a class="e-title" href="research-iontophoresis.html">An implantable redox-flow iontophoresis device for crossing the blood–brain barrier</a>
       <div class="e-meta">Bioelectronics Lab, University of Cambridge<span class="sep">|</span>Advisor: George Malliaras<span class="sep">|</span>Summer 2025</div>
-      <p class="e-desc">Found that fluidics, electrode area, and membrane chemistry, not the electronics, held delivery current at
-        the microamp scale. Redesigned the fluidic path and electrodes for a roughly 15× increase in delivered current.</p>
+      <p class="e-desc">Found that fluidics, electrode area, and membrane chemistry, reduced current severely. Redesigned the fluidic path and electrodes for a roughly 15× increase in delivered current.</p>
     </div>
   </div>
 
@@ -142,7 +138,7 @@
       <a class="e-title" href="project-spike.html">Neural spike detector ASIC</a>
       <div class="e-meta">GlobalFoundries 180&nbsp;nm via Tiny Tapeout (GF26b)<span class="sep">|</span>2026<span class="sep">|</span><a href="https://github.com/laylaadeli7/tt_neural_spike_detection" target="_blank" rel="noopener">code</a></div>
       <p class="e-desc">Independently designed and taped out a real-time digital spike detector in Verilog: pipelined IIR bandpass,
-        nonlinear energy operator, and adaptive EWMA threshold, all SPI-configurable. Full open-source flow from RTL to GDS signoff.
+        nonlinear energy operator, and adaptive EWMA threshold, all SPI-configurable. Full open-source flow completed.
         Silicon expected November 2026.</p>
       <a class="e-more" href="project-spike.html">read more →</a>
     </div>
