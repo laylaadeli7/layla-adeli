@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synthetic cells · Layla Adeli</title>
+<meta name="theme-color" content="#fcfcfa">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home" href="index.html">Layla Adeli</a>
+    <nav>
+      <a href="index.html#research">research</a>
+      <a href="index.html#projects">projects</a>
+      <a href="index.html#publications">publications</a>
+      <a href="index.html#honors">honors</a>
+      <a href="Layla_Adeli_CV.pdf">cv</a>
+    </nav>
+  </div>
+</header>
+
+<main class="detail">
+  <a class="back" href="index.html#research">&larr; back to home</a>
+  <h1>Modeling virus–host interactions with synthetic cells</h1>
+  <div class="subtitle">Murray Lab (Biocircuits), Caltech · Advisor: Prof. Richard Murray · 2024–2025</div>
+  <div class="tags">
+    <span class="tag">synthetic biology</span><span class="tag">cell-free systems</span><span class="tag">RNA toehold switches</span>
+    <span class="tag">NUPACK</span><span class="tag">liposomes</span>
+  </div>
+
+  <p class="lede">Build a cell simple enough to understand, make a virus believe it's a real host, and watch what
+  the virus does — with RNA reporters wired in to say which genes fired and when.</p>
+
+  <h3>The idea</h3>
+  <p>A real <em>E. coli</em> cell has too many moving parts to cleanly attribute anything in a viral life cycle to
+  a specific interaction. A synthetic cell — a liposome containing a cell-free expression system — is a minimal
+  chassis you build deliberately, so whatever happens inside is something you put there.</p>
+  <p>The goal was to reconstruct the PhiX174 life cycle in such a chassis: attachment, penetration, transcription,
+  replication, assembly, release.</p>
+
+  <figure class="fig">
+    <img src="img/syn-lifecycle.jpg" alt="Diagram of the six stages of the PhiX174 life cycle in a bacterial host">
+    <figcaption><b>fig 1.</b> The PhiX174 life cycle the synthetic-cell platform was built to reproduce.</figcaption>
+  </figure>
+
+  <h3>Making the virus recognize the cell</h3>
+  <p>PhiX174 attaches to lipopolysaccharides (LPS) on the <em>E. coli</em> C outer membrane, so a bare POPC liposome
+  is invisible to it. I built a minimal host membrane by embedding LPS into POPC liposomes and confirmed
+  integration by fluorescence imaging — which is what lets the phage treat the synthetic cell as a host at all.</p>
+
+  <figure class="fig">
+    <img src="img/syn-fluor.jpg" alt="Fluorescence image of liposomes with embedded lipopolysaccharides">
+    <figcaption><b>fig 2.</b> Fluorescence imaging confirming LPS integration into the POPC liposome membrane.</figcaption>
+  </figure>
+
+  <h3>Reporting on viral transcription</h3>
+  <p>To see which viral genes were being transcribed, I designed RNA toehold switches: hairpins that sequester a
+  ribosome binding site until a trigger RNA — here, a viral transcript — opens them and lets a reporter be
+  translated. A good switch is off when it should be off, which is the hard part.</p>
+
+  <figure class="fig">
+    <img src="img/syn-toehold.jpg" alt="Toehold switch OFF state, ON state, and switch-trigger fusion">
+    <figcaption><b>fig 3.</b> Toehold switch design: OFF with the RBS sequestered, ON when the trigger binds and
+    the reporter is translated.</figcaption>
+  </figure>
+
+  <p>I wrote a NUPACK pipeline to batch-simulate <strong>300+ candidate switches across all 11 viral genes</strong>,
+  scoring them on secondary structure and predicted leak, and isolated 10 low-leakage designs. These validated as
+  non-leaky with clean activation at 5 nM : 10 nM trigger ratios.</p>
+
+  <figure class="fig">
+    <img src="img/syn-gfp.jpg" alt="GFP expression curves for toehold switches with and without trigger">
+    <figcaption><b>fig 4.</b> GFP expression from toehold switches with trigger, switch-only (leak), and negative
+    control — separation between triggered and untriggered conditions is what makes a switch usable as a reporter.</figcaption>
+  </figure>
+
+  <h3>What came out of it</h3>
+  <p>A synthetic-cell platform with a host-mimicking membrane and a validated set of transcriptional reporters,
+  plus a computational pipeline for designing more of them. I also explored the role of Phi29 DNA polymerase in
+  viral particle production from TX-TL and PURE cell-free systems. Presented at Caltech SURF Seminar Day, 2024.</p>
+
+</main>
+
+<footer>
+  <div class="titleblock">
+    <div><small>Name</small>Layla Adeli · Caltech EE ’27</div>
+    <div><small>Contact</small><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a></div>
+    <div><small>Revision</small>Nov 2026</div>
+  </div>
+</footer>
+
+</body>
+</html>

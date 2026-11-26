@@ -4,99 +4,225 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Layla Adeli</title>
+<meta name="description" content="Layla Adeli: Caltech EE undergraduate working on ultra-low-power mixed-signal circuits for neural interfaces.">
+<meta name="theme-color" content="#fcfcfa">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="nav-logo"><span class="prompt">~/</span>layla-adeli</a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">home</a></li>
-    <li><a href="projects.html">projects</a></li>
-    <li><a href="research.html">research</a></li>
-    <li><a href="awards.html">awards</a></li>
-    <li><a href="mailto:ladeli@caltech.edu" class="nav-cta">contact</a></li>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="home" href="index.html">Layla Adeli</a>
+    <nav>
+      <a href="#research">research</a>
+      <a href="#projects">projects</a>
+      <a href="#publications">publications</a>
+      <a href="#honors">honors</a>
+      <a href="Layla_Adeli_CV.pdf">cv</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <h1>Layla Adeli</h1>
+  <div class="subtitle">B.S. Electrical Engineering ’27 · Caltech · MICS Lab</div>
+
+  <section class="intro">
+    <div>
+      <p>
+        I’m a senior studying <strong>Electrical Engineering</strong> (Circuits and Electronics) at Caltech.
+        I do research in the <a href="https://mics.caltech.edu/" target="_blank" rel="noopener">Mixed-Mode Integrated Circuits and Systems (MICS) Lab</a>
+        with Prof. Azita Emami. My senior thesis is a neural recording front end that decides for itself which
+        channels are worth recording.
+      </p>
+      <p>
+        I’m broadly interested in <strong>ultra-low-power mixed-signal integrated circuits for bioelectronic devices</strong>,
+        and in co-designing analog front-ends with embedded machine learning for implantable and wearable systems,
+        especially neural interfaces and brain–computer interfaces.
+      </p>
+      <p>
+        I started out in the Bioengineering option, so I’ve also built synthetic cells to model virus–host
+        interactions in Richard Murray’s lab, and redesigned an implantable drug-delivery device for glioblastoma
+        in George Malliaras’s Bioelectronics Lab at the University of Cambridge.
+      </p>
+      <div class="links">
+        <a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a>
+        <a href="Layla_Adeli_CV.pdf">CV</a>
+        <a href="https://github.com/laylaadeli7" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/layla-adeli/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <figure>
+      <!-- To use a photo instead: add img/portrait.jpg and change src below. -->
+      <img src="img/spike-die.jpg" alt="Layout render of the Tiny Tapeout spike detector tile">
+      <figcaption>My spike-detector tile, Tiny Tapeout GF26b (GF 180&nbsp;nm)</figcaption>
+    </figure>
+  </section>
+
+  <h2><span class="idx">00</span>Recent</h2>
+  <ul class="news">
+    <li><span class="d">Nov 2026</span><span>Abstract on our redox-flow iontophoresis platform submitted to <em>innoLAE 2027</em>.</span></li>
+    <li><span class="d">Nov 2026</span><span>Silicon for my <a href="project-spike.html">neural spike detector ASIC</a> (Tiny Tapeout GF26b) expected back.</span></li>
+    <li><span class="d">Oct 2026</span><span>Started working with Xue Ru Zhou (CHIC Lab) on low-power on-chip spike sorting.</span></li>
+    <li><span class="d">2026</span><span>Nominated by Caltech for the Churchill Scholarship (one of two institutional nominees).</span></li>
+    <li><span class="d">2026</span><span>Won the Best DLL Project Award in EE 124 for my <a href="project-dll.html">8 GHz delay-locked loop</a>.</span></li>
   </ul>
-</nav>
 
-<div class="page">
+  <!-- ───────────── RESEARCH ───────────── -->
+  <h2 id="research"><span class="idx">01</span>Research</h2>
 
-  <div class="hero fade">
-    <div class="hero-eyebrow">EE @ Caltech · Circuits &amp; Electronics</div>
-    <h1 class="hero-name">Layla <span>Adeli</span></h1>
-    <p class="hero-desc">
-      I enjoy building and designing at the intersection of circuits, bioelectronics, and neuroscience —
-      from low-power silicon IC design to implantable medical devices! I'm passionate about continuing this research into a more specific vein of neural interfaces as I finish up my 
-      undergraduate years. Currently a junior at Caltech, doing research in the MICS Lab. 
-    </p>
-    <div class="hero-links">
-      <a href="projects.html" class="btn btn-primary">▸ view projects</a>
-      <a href="research.html" class="btn">research</a>
-      <a href="https://www.linkedin.com/in/layla-adeli/" target="_blank" class="btn">linkedin ↗</a>
-      <a href="mailto:ladeli@caltech.edu" class="btn">email</a>
+  <div class="entry">
+    <a class="thumb" href="research-thesis.html"><img src="img/thesis-grid.svg" alt="192-electrode array with 32 selected channels"></a>
+    <div>
+      <a class="e-title" href="research-thesis.html">A 192-electrode neural recording front end with continuous on-chip channel selection in 65&nbsp;nm CMOS</a>
+      <div class="e-meta">Senior thesis<span class="sep">|</span>MICS Lab, Caltech<span class="sep">|</span>Advisor: Azita Emami<span class="sep">|</span>2025–present</div>
+      <p class="e-desc">Records only the 32 most informative of 192 electrodes and re-selects them as signals drift, using
+        unsupervised on-chip statistics. Across 14 sessions over 3.5 years, the top 32 of 96 channels keep 96% of
+        all-channel decoding accuracy (random selection: 50%, supervised: 97%).</p>
     </div>
   </div>
 
-  <hr class="divider">
-
-  <div class="section fade">
-    <div class="section-label">about</div>
-    <div class="about-text">
-      <p>
-        I'm studying Electrical Engineering at Caltech with a focus on Circuits and Electronics.
-        My work tends to land somewhere between hardware and neuroscience, and I aim to continue
-        diving into the world of neural interfaces and BCIs through mixed-signal IC design. I initially 
-        started in the Bioengineering option, and have experience in synthetic biology as well! 
-      </p>
-      <p>
-        I also run for the Caltech Cross Country and Track & Field teams at the
-        NCAA Division III level, am a violinist for the Caltech Symphony Orchestra, and enjoy tutoring
-        students through CalTutors and through my own private tutoring. I've been an avid musician for 15 years, 
-        and love learning more about and studying music theory in my spare time! I truly believe that music and running 
-        (and previously competitive swimming as well!) have been such shaping experiences in my life outside any academic passions,
-        and I have loved continuing to pursue them in my spare time. :)
-      </p>
+  <div class="entry">
+    <a class="thumb" href="research-feature-extraction.html"><img src="img/fe-bar.png" alt="Bar chart comparing decoding R² across feature extractors"></a>
+    <div>
+      <a class="e-title" href="research-feature-extraction.html">On-chip feature extraction for neuromorphic brain–computer interfaces</a>
+      <div class="e-meta">MICS Lab, Caltech<span class="sep">|</span>with Loai Danial &amp; Azita Emami<span class="sep">|</span>2025–present</div>
+      <p class="e-desc">Uses an event-driven analog front end as an analog-to-event encoder and compares compact spiking-neuron
+        feature extractors on its events. A resonate-and-fire bank reaches R²&nbsp;=&nbsp;0.690, against 0.645 for a db4
+        wavelet and 6-band spike-band power, with the lowest spread across sessions.</p>
     </div>
   </div>
 
-  <hr class="divider">
-
-  <div class="section fade">
-    <div class="section-label">skills</div>
-    <div class="skills-grid">
-      <div class="skill-block">
-        <span class="skill-block-label">programming</span>
-        <div class="skill-list">Python · C++ · Java<br>Verilog · ABEL · Arduino</div>
-      </div>
-      <div class="skill-block">
-        <span class="skill-block-label">CAD &amp; simulation</span>
-        <div class="skill-list">Cadence Virtuoso · ANSYS HFSS<br>LTSpice · KiCad · AutoCAD</div>
-      </div>
-      <div class="skill-block">
-        <span class="skill-block-label">fabrication</span>
-        <div class="skill-list">SEM · e-beam lithography<br>microfluidics · etching</div>
-      </div>
-      <div class="skill-block">
-        <span class="skill-block-label">areas</span>
-        <div class="skill-list">analog IC design · RF/antenna<br>bioelectronics · signal processing</div>
-      </div>
+  <div class="entry no-thumb">
+    <div>
+      <span class="e-title">Low-power on-chip spike sorting</span>
+      <div class="e-meta">CHIC Lab, Caltech<span class="sep">|</span>with Xue Ru Zhou<span class="sep">|</span>Oct 2026–present</div>
+      <p class="e-desc">Developing a spike-sorting pipeline efficient enough to run on every channel of a high-density implant,
+        so neural data can be sorted at the electrode. Exploring spiking-neuron feature extractors and unsupervised on-chip clustering.</p>
     </div>
   </div>
 
-</div>
+  <div class="entry no-thumb">
+    <div>
+      <span class="e-title">Wearable medical sensor: antenna design and bring-up firmware</span>
+      <div class="e-meta">MICS Lab, Caltech<span class="sep">|</span>2025–2026</div>
+      <p class="e-desc">Designed antenna geometries with parametric full-wave ANSYS HFSS simulations across tissue loading, body proximity,
+        and substrate variation; the geometry went into the fabricated antenna. Wrote the bench-test sequence and C/C++ firmware
+        (Arduino, Nordic) for the sensor ASIC, and extended it to Bluetooth.</p>
+    </div>
+  </div>
+
+  <div class="entry">
+    <a class="thumb" href="research-iontophoresis.html"><img src="img/ionto-device.jpg" alt="Diagram of the implanted redox-flow iontophoresis device"></a>
+    <div>
+      <a class="e-title" href="research-iontophoresis.html">An implantable redox-flow iontophoresis device for crossing the blood–brain barrier</a>
+      <div class="e-meta">Bioelectronics Lab, University of Cambridge<span class="sep">|</span>Advisor: George Malliaras<span class="sep">|</span>Summer 2025</div>
+      <p class="e-desc">Found that fluidics, electrode area, and membrane chemistry, not the electronics, held delivery current at
+        the microamp scale. Redesigned the fluidic path and electrodes for a roughly 15× increase in delivered current.</p>
+    </div>
+  </div>
+
+  <div class="entry">
+    <a class="thumb" href="research-synthetic-cells.html"><img src="img/syn-toehold.jpg" alt="RNA toehold switch OFF and ON states"></a>
+    <div>
+      <a class="e-title" href="research-synthetic-cells.html">Modeling virus–host interactions with synthetic cells</a>
+      <div class="e-meta">Murray Lab (Biocircuits), Caltech<span class="sep">|</span>Advisor: Richard Murray<span class="sep">|</span>2024–2025</div>
+      <p class="e-desc">Built a minimal host membrane by embedding lipopolysaccharides into POPC liposomes to isolate
+        PhiX174–<em>E. coli</em> C interactions, and designed RNA toehold switches to report on viral transcription.</p>
+    </div>
+  </div>
+
+  <!-- ───────────── PROJECTS ───────────── -->
+  <h2 id="projects"><span class="idx">02</span>Circuit design &amp; hardware projects</h2>
+
+  <div class="entry">
+    <a class="thumb" href="project-spike.html"><img src="img/spike-sim.jpg" alt="Spike detector simulation traces"></a>
+    <div>
+      <a class="e-title" href="project-spike.html">Neural spike detector ASIC</a>
+      <div class="e-meta">GlobalFoundries 180&nbsp;nm via Tiny Tapeout (GF26b)<span class="sep">|</span>2026<span class="sep">|</span><a href="https://github.com/laylaadeli7/tt_neural_spike_detection" target="_blank" rel="noopener">code</a></div>
+      <p class="e-desc">Independently designed and taped out a real-time digital spike detector in Verilog: pipelined IIR bandpass,
+        nonlinear energy operator, and adaptive EWMA threshold, all SPI-configurable. Full open-source flow from RTL to GDS signoff.
+        Silicon expected November 2026.</p>
+      <a class="e-more" href="project-spike.html">read more →</a>
+    </div>
+  </div>
+
+  <div class="entry">
+    <a class="thumb" href="project-dll.html"><img src="img/dll-eye0.jpg" alt="Eye diagram of the DLL output"></a>
+    <div>
+      <a class="e-title" href="project-dll.html">8 GHz delay-locked loop in 45&nbsp;nm CMOS</a>
+      <div class="e-meta">EE 124<span class="sep">|</span>Cadence Virtuoso, Spectre, ADE/Maestro<span class="sep">|</span>2026</div>
+      <p class="e-desc">A complete DLL — phase-frequency detector, charge pump, loop filter, voltage-controlled delay line — with
+        16.1&nbsp;fs RMS jitter clean, 3.26&nbsp;ps RMS under injected supply noise, and under 3.8&nbsp;mW total.
+        Awarded Best DLL Project for class-best power, static phase offset, and jitter.</p>
+      <a class="e-more" href="project-dll.html">read more →</a>
+    </div>
+  </div>
+
+  <!-- ───────────── PUBLICATIONS ───────────── -->
+  <h2 id="publications"><span class="idx">03</span>Publications &amp; presentations</h2>
+  <ul class="plain">
+    <li>A. Setley, C. Lee, G. G. Malliaras, A. Chemmenchery-Kokkam, and <span class="t">L. Adeli</span>.
+      Abstract on an implantable redox-flow iontophoresis platform for localized glioblastoma chemotherapy.
+      <em>Innovations in Large-Area Electronics (innoLAE) 2027</em>. Abstract submitted, Nov 2026.</li>
+    <li><span class="t">Adeli, L.</span> “Towards On-Chip Feature Extraction for Neuromorphic Brain–Computer Interfaces.”
+      <em>Caltech SURF Seminar Day</em>, 2026. Mentors: A. Emami, L. Danial.</li>
+    <li><span class="t">Adeli, L.</span> “Optimization of Iontophoresis Drug Delivery Device for Surpassing the Blood Brain Barrier.”
+      <em>Caltech SURF Seminar Day</em>, 2025. Mentors: G. Malliaras, A. Emami, A. Setley.</li>
+    <li><span class="t">Adeli, L.</span> “Towards a Minimal Model for Virus Host Interactions Using Synthetic Cells.”
+      <em>Caltech SURF Seminar Day</em>, 2024. Mentors: R. Murray, Z. Martinez.</li>
+  </ul>
+
+  <!-- ───────────── HONORS ───────────── -->
+  <h2 id="honors"><span class="idx">04</span>Honors &amp; awards</h2>
+  <ul class="rowlist">
+    <li><span><b>Churchill Scholarship Nominee</b> — one of two Caltech institutional nominees</span><span class="y">2026</span></li>
+    <li><span><b>Sampson Carlson SURF Fellowship</b> — named research fellowship, MICS Lab, Caltech</span><span class="y">2026</span></li>
+    <li><span><b>Best DLL Project Award</b> — EE 124 Mixed-Mode Integrated Circuits, Caltech</span><span class="y">2026</span></li>
+    <li><span><b>Taylor Lawrence SURF Fellowship</b> — named research fellowship, Bioelectronics Lab, Cambridge</span><span class="y">2025</span></li>
+    <li><span><b>Fred and Jean Felberg SURF Fellowship</b> — named research fellowship, Murray Lab, Caltech</span><span class="y">2024</span></li>
+  </ul>
+
+  <!-- ───────────── TEACHING ───────────── -->
+  <h2 id="teaching"><span class="idx">05</span>Teaching &amp; mentoring</h2>
+  <ul class="rowlist">
+    <li><span><b>Undergraduate Teaching Assistant</b>, Dept. of Electrical Engineering, Caltech — EE 45 (Electronics Systems and Laboratory);
+      BE/EE/MedE 189 (Design and Construction of Biodevices); EE 111 (Signal-Processing Systems and Transforms); EE/ME 7 (Introduction to Mechatronics)</span><span class="y">2026–</span></li>
+    <li><span><b>Tutor</b>, CalTutors and private tutoring — math, physics, engineering</span><span class="y">2023–</span></li>
+  </ul>
+
+  <!-- ───────────── SKILLS ───────────── -->
+  <h2 id="skills"><span class="idx">06</span>Technical skills</h2>
+  <dl class="skills">
+    <dt>analog / mixed-signal</dt>
+    <dd>Cadence Virtuoso, Spectre, ADE/Maestro, LTspice; transistor-level design of PLL/DLL blocks, charge pumps, loop filters, LNAs, SAR ADCs</dd>
+    <dt>digital &amp; verification</dt>
+    <dd>Verilog, cocotb, Icarus Verilog, LibreLane/OpenLane ASIC flow, FPGA, ABEL, fixed-point DSP</dd>
+    <dt>software</dt>
+    <dd>Python (NumPy, SciPy, PyTorch, Bokeh), C, C++, MATLAB</dd>
+    <dt>EM &amp; devices</dt>
+    <dd>ANSYS HFSS parametric full-wave simulation, S/Y-parameter extraction, impedance matching, tissue-loaded antenna modeling; device physics, microfabrication</dd>
+    <dt>PCB &amp; lab</dt>
+    <dd>Altium, KiCad, DipTrace; multilayer layout and bring-up, I²C/SPI, oscilloscopes, logic analyzers</dd>
+  </dl>
+
+  <!-- ───────────── OUTSIDE ───────────── -->
+  <h2 id="outside"><span class="idx">07</span>Outside the lab</h2>
+  <p>I run for Caltech’s NCAA Division III cross country and track &amp; field teams, play violin in the Caltech Symphony
+    Orchestra, and serve as Secretary of the IEEE student chapter. I’ve been a musician for fifteen years and still read
+    music theory for fun. Running, music, and previously competitive swimming have shaped me at least as much as anything
+    academic, and I’ve loved keeping all of them up.</p>
+
+</main>
 
 <footer>
-  <span>Layla Adeli · Caltech EE</span>
-  <span><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a> · <a href="https://linkedin.com/in/layla-adeli/" target="_blank">linkedin</a></span>
+  <div class="titleblock">
+    <div><small>Name</small>Layla Adeli · Caltech EE ’27</div>
+    <div><small>Contact</small><a href="mailto:ladeli@caltech.edu">ladeli@caltech.edu</a></div>
+    <div><small>Revision</small>Nov 2026</div>
+  </div>
 </footer>
 
-<script>
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 100); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
-</script>
 </body>
 </html>
